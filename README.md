@@ -9,7 +9,6 @@ Incluye **tres vistas principales**:
 - **Home** – Página protegida que redirige a Login si no hay sesión activa.
 
 Todas las vistas son **responsivas**, adaptándose a distintos tamaños de pantalla.
----
 
 
 ## Funcionalidades
@@ -19,17 +18,6 @@ Todas las vistas son **responsivas**, adaptándose a distintos tamaños de panta
 - Validación básica de formularios con HTML5 y JavaScript.  
 - Diseño simple, inspirado en el **menú de Minecraft**.  
 
----
-
-## Tecnologías Utilizadas
-
-- HTML5  
-- CSS3  
-- JavaScript  
-
----
-
 ## Visualización Online
 
-El proyecto está publicado en **GitHub Pages** y se puede acceder aquí:  
-[https://lolo456sjhs.github.io/backoffice/](https://lolo456sjhs.github.io/backoffice/)
+https://lolo456sjhs.github.io/backoffice/
