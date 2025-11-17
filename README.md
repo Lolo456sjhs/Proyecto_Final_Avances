@@ -24,7 +24,6 @@ En este avance se añadió **lógica completa con JavaScript**, conectando el pr
 
 https://portfolio-api-three-black.vercel.app/api/v1
 
-markdown
 
 ###  Autenticación
 
