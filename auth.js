@@ -69,19 +69,35 @@ if (window.location.pathname.endsWith("home.html")) {
   }
 }
 
-function showAddProjectForm() {
-  document.getElementById("add-project-form").style.display = "block";
+function showEditForm() {
+  document.getElementById("add-project-form").style.display = "none";
+  document.getElementById("edit-project-form").style.display = "flex";
+
+  const title = document.querySelector(".add-project-panel h2");
+  title.textContent = "Editar Proyecto";
+}
+
+function showAddForm() {
+  document.getElementById("edit-project-form").style.display = "none";
+  document.getElementById("add-project-form").style.display = "flex";
+
+  const title = document.querySelector(".add-project-panel h2");
+  title.textContent = "Agregar Proyecto";
 }
 
 async function fetchProjects() {
   const token = localStorage.getItem("authToken");
+
   try {
     const res = await fetch(`${API_BASE}/projects`, {
       headers: { "auth-token": token }
     });
+
     if (!res.ok) throw new Error("Error al obtener proyectos");
+
     const projects = await res.json();
     renderProjects(projects);
+
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -95,14 +111,21 @@ function renderProjects(projects) {
   projects.forEach(p => {
     const div = document.createElement("div");
     div.classList.add("project-card");
+
     div.innerHTML = `
       <h3>${p.title}</h3>
       <p>${p.description}</p>
       <p>Tecnologías: ${p.technologies.join(", ")}</p>
       <p>Repositorio: <a href="${p.repository}" target="_blank">GitHub</a></p>
-      <button class="mc-button" onclick="startEdit('${p._id}', '${p.title}', '${p.description}', '${p.technologies.join(",")}', '${p.repository}')">Editar</button>
+
+      <button class="mc-button"
+        onclick="startEdit('${p._id}', '${p.title}', '${p.description}', '${p.technologies.join(",")}', '${p.repository}')">
+        Editar
+      </button>
+
       <button class="mc-button" onclick="deleteProject('${p._id}')">Eliminar</button>
     `;
+
     list.appendChild(div);
   });
 }
@@ -123,53 +146,60 @@ async function addProject() {
       },
       body: JSON.stringify({ title, description, technologies, repository })
     });
+
     if (!res.ok) throw new Error("Error al crear proyecto");
+
     document.getElementById("project-title").value = "";
     document.getElementById("project-description").value = "";
     document.getElementById("project-tech").value = "";
     document.getElementById("project-repo").value = "";
+
     fetchProjects();
+
   } catch (err) {
     console.error(err);
     alert(err.message);
   }
 }
 
-// ----------------------- ELIMINAR PROYECTO -----------------------
 async function deleteProject(id) {
   const token = localStorage.getItem("authToken");
+
   try {
     const res = await fetch(`${API_BASE}/projects/${id}`, {
       method: "DELETE",
       headers: { "auth-token": token }
     });
+
     if (!res.ok) throw new Error("Error al eliminar proyecto");
+
     fetchProjects();
+
   } catch (err) {
     console.error(err);
     alert(err.message);
   }
 }
 
-// ----------------------- EDITAR PROYECTO -----------------------
 function startEdit(id, title, description, tech, repo) {
   editingProjectId = id;
-  document.getElementById("edit-project-form").style.display = "block";
+
   document.getElementById("edit-project-title").value = title;
   document.getElementById("edit-project-description").value = description;
   document.getElementById("edit-project-tech").value = tech;
   document.getElementById("edit-project-repo").value = repo;
-  document.getElementById("add-project-form").style.display = "none";
+
+  showEditForm();
 }
 
 function cancelEdit() {
   editingProjectId = null;
-  document.getElementById("edit-project-form").style.display = "none";
-  document.getElementById("add-project-form").style.display = "block"; // Mostrar formulario de agregar
+  showAddForm();
 }
 
 async function updateProject() {
   const token = localStorage.getItem("authToken");
+
   const title = document.getElementById("edit-project-title").value;
   const description = document.getElementById("edit-project-description").value;
   const technologies = document.getElementById("edit-project-tech").value.split(",").map(t => t.trim());
@@ -184,9 +214,12 @@ async function updateProject() {
       },
       body: JSON.stringify({ title, description, technologies, repository })
     });
+
     if (!res.ok) throw new Error("Error al actualizar proyecto");
-    cancelEdit();
+
+    showAddForm();
     fetchProjects();
+
   } catch (err) {
     console.error(err);
     alert(err.message);

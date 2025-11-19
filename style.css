@@ -7,16 +7,21 @@ body {
   color: #fff;
 }
 
-/* Login */
 body.login {
   background: url('img/Fondo_1.png') center / cover no-repeat;
 }
 
-/* Register */
 body.register {
   background: url('img/Fondo_2.png') center / cover no-repeat;
 }
+body.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  min-height: 100vh;
+  overflow: hidden;
+}
 .menu-container {
   background: rgba(0, 0, 0, 0.75);
   border: 4px solid #3c2a00;
@@ -82,6 +87,11 @@ a {
   color: #00ff90;
   text-decoration: none;
 }
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 
 @media (max-width: 600px) {
   .menu-container {

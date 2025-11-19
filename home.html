@@ -11,8 +11,9 @@
 
 <body class="home">
 
-  <div class="menu-container">
+  <button class="logout-button" onclick="logout()">Cerrar Sesión</button>
 
+  <div class="menu-container">
 
     <div class="home-header">
       <h1 class="title">Proyectos</h1>
@@ -21,9 +22,11 @@
     <div class="home-content">
 
       <div class="add-project-panel">
-        <h2>Agregar Proyecto</h2>
+        
+        <h2 id="form-title">Agregar Proyecto</h2>
 
         <div id="add-project-form">
+
           <label for="project-title">Título</label>
           <input type="text" id="project-title" />
 
@@ -40,23 +43,31 @@
         </div>
 
         <div id="edit-project-form" style="display: none;">
-          <h3>Editar Proyecto</h3>
 
-          <label for="edit-project-title">Título</label>
-          <input type="text" id="edit-project-title" />
+          <div class="form-group">
+            <label for="edit-project-title">Título</label>
+            <input type="text" id="edit-project-title" />
+          </div>
 
-          <label for="edit-project-description">Descripción</label>
-          <input type="text" id="edit-project-description" />
+          <div class="form-group">
+            <label for="edit-project-description">Descripción</label>
+            <input type="text" id="edit-project-description" />
+          </div>
 
-          <label for="edit-project-tech">Tecnologías (separadas por coma)</label>
-          <input type="text" id="edit-project-tech" />
+          <div class="form-group">
+            <label for="edit-project-tech">Tecnologías (separadas por coma)</label>
+            <input type="text" id="edit-project-tech" />
+          </div>
 
-          <label for="edit-project-repo">Repositorio URL</label>
-          <input type="text" id="edit-project-repo" />
+          <div class="form-group">
+            <label for="edit-project-repo">Repositorio URL</label>
+            <input type="text" id="edit-project-repo" />
+          </div>
 
           <button class="mc-button" onclick="updateProject()">Guardar cambios</button>
           <button class="mc-button" onclick="cancelEdit()">Cancelar</button>
         </div>
+
       </div>
 
       <div class="projects-panel">
